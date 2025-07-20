@@ -34,7 +34,15 @@ export const calculateProfit = ({
   }
 
   const profit = revenue - totalCost;
-  const costPerUnit = eddmVolume > 0 ? revenue / eddmVolume : 0;
+
+  const costPerUnit = {
+    standard: eddmVolume > 0 ? pricePerStandard / eddmVolume : 0,
+    half: eddmVolume > 0 ? pricePerHalf / eddmVolume : 0,
+    double: eddmVolume > 0 ? pricePerDouble / eddmVolume : 0
+  };
+
+  const breakEvenPrice = standardAds > 0 ? totalCost / standardAds : null;
+
 
   return {
     totalRevenue: revenue,
@@ -42,6 +50,7 @@ export const calculateProfit = ({
     printCost,
     totalCost,
     profit,
-    costPerUnit
+    costPerUnit,
+    breakEvenPrice
   };
 };
